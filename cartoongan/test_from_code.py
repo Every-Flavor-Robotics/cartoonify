@@ -15,7 +15,7 @@ def transform(models, style, input, load_size=450, gpu=-1):
     model = models[style]
 
     if gpu > -1:
-        model.cuda()
+        model.to(f"cuda:{gpu}")
     else:
         model.float()
 
@@ -39,7 +39,7 @@ def transform(models, style, input, load_size=450, gpu=-1):
 
     input_image = -1 + 2 * input_image
     if gpu > -1:
-        input_image = Variable(input_image).cuda()
+        input_image = Variable(input_image).to(f"cuda:{gpu}")
     else:
         input_image = Variable(input_image).float()
 
